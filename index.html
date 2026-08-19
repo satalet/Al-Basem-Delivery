@@ -34,17 +34,37 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .icon-badge {
-            width: 75px;
-            height: 75px;
-            background: linear-gradient(135deg, #10b981, #059669);
+        /* تنسيق صورة باسم */
+        .avatar-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #10b981;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .bike-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #f59e0b;
+            color: #000;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
-            margin: 0 auto 16px;
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+            font-size: 16px;
+            border: 2px solid #1e293b;
         }
 
         h1 {
@@ -148,7 +168,11 @@
 <body>
 
     <div class="card">
-        <div class="icon-badge">⚡🚲</div>
+        <!-- قسم الصورة -->
+        <div class="avatar-container">
+            <img src="basem.jpg" alt="باسم" class="avatar-img">
+            <div class="bike-badge">⚡</div>
+        </div>
         
         <h1>بسكليتاتو الباسم</h1>
         <p class="subtitle">خدمة توصيل الطلبات والأغراض السريعة</p>
