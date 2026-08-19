@@ -113,16 +113,31 @@
         }
 
         .service-box {
-            background: rgba(255, 255, 255, 0.04);
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 10px;
             border-radius: 12px;
             font-size: 13px;
-            color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-weight: 600;
+            color: #f1f5f9;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .service-box:hover {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-2px);
+            color: #34d399;
+        }
+
+        .service-box:active {
+            transform: scale(0.96);
         }
 
         .coverage-box {
@@ -167,6 +182,10 @@
             box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
         }
 
+        .btn:hover {
+            filter: brightness(1.08);
+        }
+
         .btn:active {
             transform: scale(0.97);
         }
@@ -194,11 +213,20 @@
             أي طلبة بس بـ 5 شيكل 🔥🏷️
         </div>
 
+        <!-- الأزرار التفاعلية للخدمات -->
         <div class="services-grid">
-            <div class="service-box">🥩 ملحمة ولحوم</div>
-            <div class="service-box">🛒 سوبرماركت</div>
-            <div class="service-box">🥖 مخبز ومعجنات</div>
-            <div class="service-box">💊 صيدلية وطوارئ</div>
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(ملحمة%20ولحوم)" class="service-box">
+                🥩 ملحمة ولحوم
+            </a>
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(سوبرماركت)" class="service-box">
+                🛒 سوبرماركت
+            </a>
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(مخبز%20ومعجنات)" class="service-box">
+                🥖 مخبز ومعجنات
+            </a>
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(صيدلية%20وطوارئ)" class="service-box">
+                💊 صيدلية وطوارئ
+            </a>
         </div>
 
         <div class="coverage-box">
@@ -207,7 +235,7 @@
         </div>
 
         <div class="actions">
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية" class="btn btn-whatsapp">
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20عامة" class="btn btn-whatsapp">
                 <span>💬</span> اطلب فوراً ع الواتساب
             </a>
             <a href="tel:0523260604" class="btn btn-call">
