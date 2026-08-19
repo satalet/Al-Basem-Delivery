@@ -3,333 +3,1040 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل</title>
 
-<meta name="description"
-      content="بسكليتاتو الباسم 🚴‍♂️⚡ خدمة توصيل سريعة في الرام، ضاحية البريد وضاحية الأقباط. أي طلبية بـ 5 شيكل فقط. اطلب الآن عبر واتساب.">
+    <title>بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل</title>
 
-<meta name="theme-color" content="#0f172a">
+    <meta name="description"
+          content="بسكليتاتو الباسم 🚴‍♂️⚡ خدمة توصيل سريعة في الرام، ضاحية البريد وضاحية الأقباط. أي طلبية بـ 5 شيكل فقط. اطلب الآن عبر واتساب.">
 
-<link rel="canonical"
-      href="https://satalet.github.io/Al-Basem-Delivery/">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="robots" content="index, follow">
 
-<!-- Facebook / WhatsApp -->
-<meta property="og:type" content="website">
-<meta property="og:url"
-      content="https://satalet.github.io/Al-Basem-Delivery/">
-<meta property="og:site_name" content="بسكليتاتو الباسم">
-<meta property="og:locale" content="ar_AR">
-<meta property="og:title"
-      content="بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل">
-<meta property="og:description"
-      content="أي طلبية بـ 5 شيكل فقط 🔥 توصيل سريع إلى باب بيتك في الرام، ضاحية البريد وضاحية الأقباط.">
-<meta property="og:image"
-      content="https://satalet.github.io/Al-Basem-Delivery/poster.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt"
-      content="بسكليتاتو الباسم - خدمة التوصيل السريع">
+    <link rel="canonical"
+          href="https://satalet.github.io/Al-Basem-Delivery/">
 
-<!-- Twitter / X -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title"
-      content="بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل">
-<meta name="twitter:description"
-      content="أي طلبية بـ 5 شيكل فقط 🔥 توصيل سريع في الرام والمناطق المحيطة.">
-<meta name="twitter:image"
-      content="https://satalet.github.io/Al-Basem-Delivery/poster.jpg">
+    <!-- =========================
+         Facebook / WhatsApp
+    ========================== -->
+
+    <meta property="og:type" content="website">
+    <meta property="og:url"
+          content="https://satalet.github.io/Al-Basem-Delivery/">
+    <meta property="og:site_name" content="بسكليتاتو الباسم">
+    <meta property="og:locale" content="ar_AR">
+
+    <meta property="og:title"
+          content="بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل">
+
+    <meta property="og:description"
+          content="أي طلبية بـ 5 شيكل فقط 🔥 توصيل سريع إلى باب بيتك في الرام، ضاحية البريد وضاحية الأقباط.">
+
+    <meta property="og:image"
+          content="https://satalet.github.io/Al-Basem-Delivery/poster.jpg">
+
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta property="og:image:alt"
+          content="بسكليتاتو الباسم - خدمة التوصيل السريع">
+
+    <!-- =========================
+         Twitter / X
+    ========================== -->
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title"
+          content="بسكليتاتو الباسم 🚴‍♂️⚡ | توصيل سريع بـ 5 شيكل">
+
+    <meta name="twitter:description"
+          content="أي طلبية بـ 5 شيكل فقط 🔥 توصيل سريع في الرام والمناطق المحيطة.">
+
+    <meta name="twitter:image"
+          content="https://satalet.github.io/Al-Basem-Delivery/poster.jpg">
+
+
     <style>
+
+        /* ==================================================
+           RESET
+        ================================================== */
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #0f172a;
+            font-family:
+                system-ui,
+                -apple-system,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background: #0f172a;
+            color: #ffffff;
+
             min-height: 100vh;
+
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
+
+            padding: 22px 16px;
+
             overflow-x: hidden;
+
             position: relative;
         }
 
-        /* دوائر الإضاءة المتحركة بالخلفية */
-        .bg-glow-1, .bg-glow-2, .bg-glow-3 {
+
+        /* ==================================================
+           BACKGROUND
+        ================================================== */
+
+        .background {
             position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-            opacity: 0.55;
+            inset: 0;
+
+            overflow: hidden;
+
             pointer-events: none;
-            animation: float 10s infinite ease-in-out alternate;
+
+            z-index: 0;
         }
 
-        .bg-glow-1 {
-            width: 320px;
-            height: 320px;
-            background: linear-gradient(135deg, #10b981, #06b6d4);
-            top: -50px;
-            right: -50px;
+        .bg-glow {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(80px);
+
+            opacity: 0.45;
+
+            animation:
+                floatGlow
+                12s
+                ease-in-out
+                infinite
+                alternate;
         }
 
-        .bg-glow-2 {
-            width: 350px;
-            height: 350px;
-            background: linear-gradient(135deg, #f59e0b, #ec4899);
-            bottom: -60px;
-            left: -60px;
-            animation-duration: 12s;
-            animation-delay: -3s;
+        .glow-1 {
+            width: 330px;
+            height: 330px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #10b981,
+                    #06b6d4
+                );
+
+            top: -100px;
+            right: -80px;
         }
 
-        .bg-glow-3 {
+        .glow-2 {
+            width: 360px;
+            height: 360px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #ec4899
+                );
+
+            bottom: -130px;
+            left: -100px;
+
+            animation-delay: -4s;
+            animation-duration: 15s;
+        }
+
+        .glow-3 {
             width: 250px;
             height: 250px;
+
             background: #3b82f6;
+
             top: 40%;
-            left: 20%;
-            animation-duration: 8s;
-            animation-delay: -5s;
+            left: 15%;
+
+            opacity: 0.22;
+
+            animation-delay: -7s;
+            animation-duration: 10s;
         }
 
-        @keyframes float {
+        @keyframes floatGlow {
+
             0% {
-                transform: translate(0, 0) scale(1);
+                transform:
+                    translate3d(0, 0, 0)
+                    scale(1);
             }
+
             100% {
-                transform: translate(40px, 30px) scale(1.15);
+                transform:
+                    translate3d(35px, 25px, 0)
+                    scale(1.12);
             }
         }
 
-        /* كرت العرض الزجاجي */
+
+        /* ==================================================
+           MAIN CARD
+        ================================================== */
+
         .card {
             position: relative;
-            z-index: 1;
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 28px;
-            max-width: 400px;
+
+            z-index: 2;
+
             width: 100%;
-            padding: 30px 22px;
+            max-width: 430px;
+
+            padding: 30px 22px 24px;
+
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+            background:
+                rgba(15, 23, 42, 0.72);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.14);
+
+            border-radius: 30px;
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow:
+                0 30px 70px
+                rgba(0, 0, 0, 0.48);
+
+            overflow: hidden;
         }
+
+        /* لمعان خفيف أعلى الكرت */
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 12%;
+
+            width: 76%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.7),
+                    transparent
+                );
+
+            opacity: 0.7;
+        }
+
+
+        /* ==================================================
+           PROFILE IMAGE
+        ================================================== */
 
         .avatar-wrapper {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 18px;
+
+            width: 124px;
+            height: 124px;
+
+            margin:
+                0 auto 18px;
+        }
+
+        .avatar-wrapper::before {
+            content: "";
+
+            position: absolute;
+
+            inset: -7px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(16, 185, 129, 0.45);
+
+            animation:
+                avatarPulse
+                2.8s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes avatarPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
         }
 
         .avatar-img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
             border-radius: 50%;
-            border: 4px solid #10b981;
-            box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+
+            border:
+                4px solid
+                #10b981;
+
+            box-shadow:
+                0 0 30px
+                rgba(16, 185, 129, 0.45);
+
+            display: block;
         }
 
         .status-badge {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
-            background: #f59e0b;
-            color: #000;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+
+            right: 0;
+            bottom: 3px;
+
+            width: 34px;
+            height: 34px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fbbf24,
+                    #f59e0b
+                );
+
+            color: #0f172a;
+
+            border-radius: 50%;
+
+            border:
+                3px solid
+                #0f172a;
+
             font-size: 16px;
-            border: 3px solid #0f172a;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+            box-shadow:
+                0 5px 15px
+                rgba(245, 158, 11, 0.35);
         }
 
+
+        /* ==================================================
+           TITLES
+        ================================================== */
+
         h1 {
-            font-size: 25px;
-            font-weight: 800;
+            font-size: clamp(24px, 7vw, 28px);
+
+            line-height: 1.2;
+
+            font-weight: 900;
+
             color: #ffffff;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+
+            margin-bottom: 7px;
+
+            letter-spacing: -0.6px;
+
+            text-shadow:
+                0 3px 15px
+                rgba(0, 0, 0, 0.35);
         }
 
         .subtitle {
-            font-size: 14px;
             color: #cbd5e1;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
             margin-bottom: 18px;
         }
 
-        .price-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #0f172a;
-            padding: 8px 22px;
-            border-radius: 50px;
-            font-size: 15px;
-            font-weight: 900;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
-            animation: pulse 2s infinite;
+        .subtitle strong {
+            color: #6ee7b7;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+
+        /* ==================================================
+           PRICE
+        ================================================== */
+
+        .price-badge {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 6px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fbbf24,
+                    #d97706
+                );
+
+            color: #111827;
+
+            padding:
+                9px
+                20px;
+
+            border-radius: 999px;
+
+            font-size: 15px;
+
+            font-weight: 900;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 7px 22px
+                rgba(245, 158, 11, 0.32);
+
+            animation:
+                pricePulse
+                2.5s
+                ease-in-out
+                infinite;
+        }
+
+        @keyframes pricePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.035);
+            }
+        }
+
+
+        /* ==================================================
+           SERVICES
+        ================================================== */
+
+        .section-title {
+            font-size: 12px;
+
+            color: #94a3b8;
+
+            margin-bottom: 10px;
+
+            font-weight: 700;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, minmax(0, 1fr));
+
             gap: 10px;
+
             margin-bottom: 18px;
         }
 
         .service-box {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 12px 10px;
-            border-radius: 14px;
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #f8fafc;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            position: relative;
+
+            min-height: 62px;
+
+            padding:
+                12px
+                8px;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
-            gap: 6px;
+
+            gap: 7px;
+
+            text-align: center;
+
             text-decoration: none;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
+
+            color: #f8fafc;
+
+            background:
+                rgba(255, 255, 255, 0.065);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            border-radius: 15px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
         .service-box:hover {
-            background: rgba(16, 185, 129, 0.25);
-            border-color: #10b981;
-            transform: translateY(-2px);
-            color: #6ee7b7;
+            background:
+                rgba(16, 185, 129, 0.16);
+
+            border-color:
+                rgba(52, 211, 153, 0.65);
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(16, 185, 129, 0.12);
         }
 
         .service-box:active {
             transform: scale(0.96);
         }
 
-        .coverage-box {
-            background: rgba(16, 185, 129, 0.12);
-            border: 1px dashed rgba(52, 211, 153, 0.5);
-            padding: 12px;
-            border-radius: 14px;
-            margin-bottom: 22px;
-            font-size: 13px;
-            color: #a7f3d0;
-            line-height: 1.5;
+        .service-icon {
+            font-size: 20px;
+            line-height: 1;
         }
+
+
+        /* ==================================================
+           COVERAGE
+        ================================================== */
+
+        .coverage-box {
+            position: relative;
+
+            background:
+                rgba(16, 185, 129, 0.09);
+
+            border:
+                1px dashed
+                rgba(52, 211, 153, 0.45);
+
+            padding:
+                13px
+                12px;
+
+            border-radius: 15px;
+
+            margin-bottom: 20px;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            color: #a7f3d0;
+        }
+
+        .coverage-title {
+            color: #6ee7b7;
+
+            font-weight: 900;
+        }
+
+
+        /* ==================================================
+           ACTION BUTTONS
+        ================================================== */
 
         .actions {
             display: flex;
+
             flex-direction: column;
-            gap: 12px;
+
+            gap: 11px;
         }
 
         .btn {
+            min-height: 54px;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             gap: 10px;
-            padding: 14px;
-            border-radius: 14px;
+
+            padding:
+                13px
+                15px;
+
+            border-radius: 15px;
+
             text-decoration: none;
-            font-weight: 800;
+
             font-size: 15px;
-            transition: transform 0.15s ease, filter 0.15s ease;
+
+            font-weight: 900;
+
+            transition:
+                transform 0.18s ease,
+                filter 0.18s ease,
+                box-shadow 0.18s ease;
+        }
+
+        .btn-icon {
+            font-size: 20px;
+            line-height: 1;
         }
 
         .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366, #128c7e);
+            background:
+                linear-gradient(
+                    135deg,
+                    #25d366,
+                    #128c7e
+                );
+
             color: #ffffff;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+
+            box-shadow:
+                0 8px 25px
+                rgba(37, 211, 102, 0.28);
         }
 
         .btn-call {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b82f6,
+                    #1d4ed8
+                );
+
             color: #ffffff;
-            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+
+            box-shadow:
+                0 8px 25px
+                rgba(59, 130, 246, 0.25);
         }
 
         .btn:hover {
-            filter: brightness(1.1);
+            filter: brightness(1.08);
+
+            transform:
+                translateY(-2px);
         }
 
         .btn:active {
             transform: scale(0.97);
         }
 
+
+        /* ==================================================
+           FOOTER
+        ================================================== */
+
         .footer-text {
-            margin-top: 18px;
+            margin-top: 19px;
+
             font-size: 12px;
+
             color: #94a3b8;
+
+            line-height: 1.6;
         }
+
+        .footer-brand {
+            color: #6ee7b7;
+
+            font-weight: 800;
+        }
+
+
+        /* ==================================================
+           FLOATING WHATSAPP
+        ================================================== */
+
+        .floating-whatsapp {
+            position: fixed;
+
+            left: 18px;
+            bottom: 18px;
+
+            z-index: 10;
+
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #25d366,
+                    #128c7e
+                );
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.35);
+
+            border:
+                2px solid
+                rgba(255,255,255,0.22);
+
+            transition:
+                transform 0.2s ease,
+                filter 0.2s ease;
+        }
+
+        .floating-whatsapp:hover {
+            transform:
+                scale(1.08);
+
+            filter:
+                brightness(1.08);
+        }
+
+
+        /* ==================================================
+           MOBILE
+        ================================================== */
+
+        @media (max-width: 380px) {
+
+            body {
+                padding:
+                    14px 11px;
+            }
+
+            .card {
+                padding:
+                    25px 16px 20px;
+
+                border-radius: 25px;
+            }
+
+            .avatar-wrapper {
+                width: 110px;
+                height: 110px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            .service-box {
+                font-size: 12.5px;
+            }
+
+            .floating-whatsapp {
+                width: 50px;
+                height: 50px;
+
+                left: 13px;
+                bottom: 13px;
+            }
+        }
+
+
+        /* ==================================================
+           ACCESSIBILITY
+        ================================================== */
+
+        a:focus-visible {
+            outline:
+                3px solid
+                #fbbf24;
+
+            outline-offset: 3px;
+        }
+
+
+        /* ==================================================
+           REDUCE MOTION
+        ================================================== */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
     </style>
 </head>
+
+
 <body>
 
-    <!-- عناصر الإضاءة التفاعلية في الخلفية -->
-    <div class="bg-glow-1"></div>
-    <div class="bg-glow-2"></div>
-    <div class="bg-glow-3"></div>
+    <!-- ==================================================
+         BACKGROUND EFFECTS
+    ================================================== -->
 
-    <div class="card">
+    <div class="background" aria-hidden="true">
+
+        <div class="bg-glow glow-1"></div>
+        <div class="bg-glow glow-2"></div>
+        <div class="bg-glow glow-3"></div>
+
+    </div>
+
+
+    <!-- ==================================================
+         MAIN CARD
+    ================================================== -->
+
+    <main class="card">
+
+        <!-- PROFILE -->
+
         <div class="avatar-wrapper">
-            <img src="basem.jpg" alt="باسم" class="avatar-img">
-            <div class="status-badge">⚡</div>
+
+            <img
+                src="basem.jpg"
+                alt="باسم - بسكليتاتو الباسم"
+                class="avatar-img"
+                loading="eager"
+            >
+
+            <div
+                class="status-badge"
+                aria-label="خدمة سريعة"
+            >
+                ⚡
+            </div>
+
         </div>
 
-        <h1>بسكليتاتو الباسم</h1>
-        <p class="subtitle">خدمة توصيل سريعة • لباب بيتك 🏡</p>
 
-        <div class="price-badge">
-            أي طلبية بس بـ 5 شيكل 🔥🏷️
+        <!-- TITLE -->
+
+        <h1>
+            بسكليتاتو الباسم 🚴‍♂️
+        </h1>
+
+        <p class="subtitle">
+            توصيل سريع وأمين
+            <strong>لباب بيتك 🏡</strong>
+        </p>
+
+
+        <!-- PRICE -->
+
+        <div
+            class="price-badge"
+            aria-label="سعر التوصيل خمسة شيكل"
+        >
+            🔥 أي طلبية بـ 5 شيكل فقط
+        </div>
+
+
+        <!-- SERVICES -->
+
+        <div class="section-title">
+            شو بدك نجيبلك؟ 👇
         </div>
 
         <div class="services-grid">
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(ملحمة%20ولحوم)" class="service-box">
-                🥩 ملحمة ولحوم
+
+            <!-- BUTCHER -->
+
+            <a
+                href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%0Aبدي%20طلبية%20من%20ملحمة%20ولحوم%20🥩%0Aاسم%20المحل:%20%0Aالطلب:%20"
+                class="service-box"
+                aria-label="طلب من ملحمة ولحوم"
+            >
+                <span class="service-icon">🥩</span>
+                <span>ملحمة ولحوم</span>
             </a>
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(سوبرماركت)" class="service-box">
-                🛒 سوبرماركت
+
+
+            <!-- SUPERMARKET -->
+
+            <a
+                href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%0Aبدي%20طلبية%20من%20سوبرماركت%20🛒%0Aاسم%20المحل:%20%0Aالطلب:%20"
+                class="service-box"
+                aria-label="طلب من سوبرماركت"
+            >
+                <span class="service-icon">🛒</span>
+                <span>سوبرماركت</span>
             </a>
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(مخبز%20ومعجنات)" class="service-box">
-                🥖 مخبز ومعجنات
+
+
+            <!-- BAKERY -->
+
+            <a
+                href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%0Aبدي%20طلبية%20من%20مخبز%20ومعجنات%20🥖%0Aاسم%20المحل:%20%0Aالطلب:%20"
+                class="service-box"
+                aria-label="طلب من مخبز ومعجنات"
+            >
+                <span class="service-icon">🥖</span>
+                <span>مخبز ومعجنات</span>
             </a>
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20(صيدلية%20وطوارئ)" class="service-box">
-                💊 صيدلية وطوارئ
+
+
+            <!-- PHARMACY -->
+
+            <a
+                href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%0Aبدي%20طلبية%20من%20صيدلية%20💊%0Aاسم%20الصيدلية:%20%0Aالطلب:%20"
+                class="service-box"
+                aria-label="طلب من صيدلية"
+            >
+                <span class="service-icon">💊</span>
+                <span>صيدلية</span>
             </a>
+
         </div>
+
+
+        <!-- COVERAGE -->
 
         <div class="coverage-box">
-            📍 <strong>مناطق التغطية:</strong><br>
+
+            📍
+
+            <span class="coverage-title">
+                مناطق التغطية:
+            </span>
+
+            <br>
+
             الرام • ضاحية البريد • ضاحية الأقباط
+
         </div>
+
+
+        <!-- ACTIONS -->
 
         <div class="actions">
-            <a href="https://wa.me/972523260604?text=مرحبا%20باسم،%20عندي%20طلبية%20عامة" class="btn btn-whatsapp">
-                <span>💬</span> اطلب فوراً ع الواتساب
+
+            <!-- WHATSAPP -->
+
+            <a
+                href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%0Aعندي%20طلبية%20وبدي%20التوصيل.%0Aمنطقة%20التوصيل:%20%0Aالمحل:%20%0Aالطلب:%20"
+                class="btn btn-whatsapp"
+                aria-label="طلب توصيل عبر واتساب"
+            >
+
+                <span class="btn-icon">
+                    💬
+                </span>
+
+                <span>
+                    اطلب الآن ع الواتساب
+                </span>
+
             </a>
-            <a href="tel:0523260604" class="btn btn-call">
-                <span>📞</span> اتصال: 0523260604
+
+
+            <!-- CALL -->
+
+            <a
+                href="tel:0523260604"
+                class="btn btn-call"
+                aria-label="الاتصال بأبو باسم"
+            >
+
+                <span class="btn-icon">
+                    📞
+                </span>
+
+                <span>
+                    اتصال مباشر: 0523260604
+                </span>
+
             </a>
+
         </div>
 
-        <p class="footer-text">سرعة • أمانة • توصيل فوري</p>
-    </div>
+
+        <!-- FOOTER -->
+
+        <p class="footer-text">
+
+            ⚡ سرعة
+            •
+            🤝 أمانة
+            •
+            🏡 توصيل لباب بيتك
+
+            <br>
+
+            <span class="footer-brand">
+                بسكليتاتو الباسم
+            </span>
+
+        </p>
+
+    </main>
+
+
+    <!-- ==================================================
+         FLOATING WHATSAPP
+    ================================================== -->
+
+    <a
+        href="https://wa.me/972523260604?text=مرحبا%20أبو%20باسم%20👋%20بدي%20أستفسر%20عن%20خدمة%20التوصيل."
+        class="floating-whatsapp"
+        aria-label="فتح واتساب"
+        title="واتساب"
+    >
+        💬
+    </a>
 
 </body>
 </html>
