@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة تحكم الحالة | بسكليتاتو الباسم</title>
     <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
         body { background: #0f172a; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
@@ -12,14 +13,12 @@
         h2 { font-size: 22px; margin-bottom: 8px; color: #6ee7b7; }
         p { font-size: 13px; color: #94a3b8; margin-bottom: 24px; }
         
-        /* شاشة القفل */
         .pin-container { display: flex; flex-direction: column; gap: 14px; }
         .pin-input { width: 100%; padding: 14px; text-align: center; font-size: 24px; letter-spacing: 6px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.8); color: #fff; outline: none; }
         .pin-input:focus { border-color: #10b981; }
         .remember-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: #cbd5e1; cursor: pointer; }
         .btn-unlock { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; border: none; border-radius: 14px; padding: 14px; font-size: 16px; font-weight: 800; cursor: pointer; }
         
-        /* لوحة التحكم */
         .dashboard-content { display: none; }
         .current-status { padding: 14px; border-radius: 14px; font-weight: 800; font-size: 15px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.1); transition: all .3s ease; }
         .status-on { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border-color: #10b981; }
@@ -36,7 +35,6 @@
 
     <div class="admin-card">
 
-        <!-- شاشة إدخال الرمز السري -->
         <div id="lockScreen">
             <h2>🔒 صفحة محمية</h2>
             <p>أدخل الرمز السري للتحكم بالحالة</p>
@@ -46,14 +44,13 @@
                 
                 <label class="remember-wrap">
                     <input type="checkbox" id="rememberMe" checked>
-                    <span>تذكر هذا الجهاز (عدم طلب الرمز لاحقاً)</span>
+                    <span>تذكر هذا الجهاز</span>
                 </label>
 
                 <button class="btn-unlock" onclick="checkPin()">دخول 🔓</button>
             </div>
         </div>
 
-        <!-- لوحة التحكم الفعلية (مخفية حتى يتم فك القفل) -->
         <div id="dashboardScreen" class="dashboard-content">
             <h2>🚴‍♂️ تحكم حالة التوصيل</h2>
             <p>غيّر حالتك بالكرت بكبسة زر واحدة</p>
@@ -79,9 +76,7 @@
     </div>
 
     <script>
-        // الرمز السري لتسجيل الدخول (بتقدر تعدله لأي رقم بدك إياه)
         const SECRET_PIN = "201412";
-
         const BIN_ID = "6a875d9cda38895dfefcc10c";
         const API_KEY = "$2a$10$p55UIZYJHw6qcxqULfVK0e7EA7ufzRBozx6.yc7PgE2xU/FBqrCEi";
 
@@ -92,7 +87,6 @@
         const statusBox = document.getElementById("statusBox");
         const toast = document.getElementById("toast");
 
-        // التحقق التلقائي إذا الجهاز محفوظ مسبقاً
         if (localStorage.getItem("basem_admin_auth") === SECRET_PIN) {
             unlockDashboard();
         }
@@ -163,11 +157,8 @@
             setTimeout(() => { toast.textContent = ""; }, 3500);
         }
 
-        // دعم ضغط زر Enter للإدخال السريع
         pinInput.addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                checkPin();
-            }
+            if (event.key === "Enter") checkPin();
         });
     </script>
 </body>

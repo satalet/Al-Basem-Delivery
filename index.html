@@ -33,15 +33,23 @@
         href="https://satalet.github.io/Al-Basem-Delivery/"
     >
 
-    <!-- PWA -->
+    <!-- PWA & Favicon -->
     <link
-        rel="manifest"
-        href="manifest.json"
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="favicon-32x32.png"
     >
 
     <link
         rel="apple-touch-icon"
-        href="poster.jpg"
+        sizes="180x180"
+        href="apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="manifest.json"
     >
 
 
@@ -1744,7 +1752,7 @@
         <div class="install-popup-info">
 
             <img
-                src="basem.jpg"
+                src="icon-192.png"
                 alt="بسكليتاتو الباسم"
                 class="install-popup-img"
             >
@@ -1891,20 +1899,17 @@
 
             } catch (error) {
 
-                // في حال عدم توفر نت لحظي تبقى الحالة كما هي دون أي خطأ
+                // تبقى الحالة كما هي في حال انقطاع النت المؤقت
             } finally {
 
                 isCheckingStatus = false;
             }
         }
 
-        // فحص أولي فوري
         updateLiveStatus();
 
-        // فحص صامت في الخلفية كل 10 ثوانٍ
         setInterval(updateLiveStatus, 10000);
 
-        // فحص عند عودة الزبون للتبويب أو فتح قفل الشاشة
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "visible") {
                 updateLiveStatus();

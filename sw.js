@@ -1,14 +1,17 @@
-const CACHE_NAME = "al-basem-delivery-v4";
+const CACHE_NAME = "al-basem-delivery-v5";
 
 const FILES_TO_CACHE = [
     "./",
     "./index.html",
     "./poster.jpg",
     "./basem.jpg",
+    "./icon-192.png",
+    "./icon-512.png",
+    "./apple-touch-icon.png",
+    "./favicon-32x32.png",
     "./manifest.json"
 ];
 
-// تثبيت الـ Service Worker وتخزين الملفات الأساسية بالكاش
 self.addEventListener("install", event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
@@ -18,7 +21,6 @@ self.addEventListener("install", event => {
     self.skipWaiting();
 });
 
-// تفعيل النسخة الجديدة وحذف أي كاش قديم
 self.addEventListener("activate", event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -32,21 +34,19 @@ self.addEventListener("activate", event => {
     self.clients.claim();
 });
 
-// إدارة طلبات الملفات
 self.addEventListener("fetch", event => {
     if (event.request.method !== "GET") {
         return;
     }
 
-    // استثناء ملف status.json لجلبه مباشرة من النت بدون تخزين كاش
-    if (event.request.url.includes("status.json")) {
+    // استثناء رابط الحالة من الكاش لجلبه لحظياً من النت
+    if (event.request.url.includes("api.jsonbin.io")) {
         event.respondWith(
             fetch(event.request).catch(() => caches.match(event.request))
         );
         return;
     }
 
-    // باقي ملفات الكرت: تحديث الكاش والعمل بدون إنترنت
     event.respondWith(
         fetch(event.request)
             .then(response => {
