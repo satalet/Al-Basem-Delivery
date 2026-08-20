@@ -468,12 +468,88 @@
 
             line-height: 1.6;
 
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
 
         /* =========================================
-           LIVE STATUS
+           BADGES CONTAINER (STACKED CLEANLY)
+        ========================================= */
+
+        .badges-container {
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================
+           PRICE BADGE
+        ========================================= */
+
+        .price-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f59e0b,
+                    #d97706
+                );
+
+            color: #0f172a;
+
+            padding:
+                9px 22px;
+
+            border-radius: 50px;
+
+            font-size: 15px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 5px 18px
+                rgba(245,158,11,.38);
+
+            animation:
+                pricePulse
+                2.3s
+                infinite
+                ease-in-out;
+        }
+
+        @keyframes pricePulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.035);
+            }
+        }
+
+
+        /* =========================================
+           LIVE STATUS BADGE
         ========================================= */
 
         .live-status {
@@ -482,25 +558,25 @@
 
             align-items: center;
 
-            gap: 7px;
+            justify-content: center;
+
+            gap: 8px;
 
             padding:
-                6px 14px;
-
-            margin-bottom: 17px;
+                6px 16px;
 
             border-radius: 999px;
 
             background:
-                rgba(16,185,129,.10);
+                rgba(16,185,129,.12);
 
             border:
                 1px solid
-                rgba(52,211,153,.35);
+                rgba(52,211,153,.40);
 
             color: #6ee7b7;
 
-            font-size: 12px;
+            font-size: 12.5px;
 
             font-weight: 800;
 
@@ -527,8 +603,8 @@
         }
 
         .live-status.offline {
-            background: rgba(239,68,68,.12);
-            border-color: rgba(239,68,68,.40);
+            background: rgba(239,68,68,.14);
+            border-color: rgba(239,68,68,.45);
             color: #fca5a5;
         }
 
@@ -546,63 +622,6 @@
 
             50% {
                 opacity: .45;
-            }
-        }
-
-
-        /* =========================================
-           PRICE
-        ========================================= */
-
-        .price-badge {
-
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 5px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #f59e0b,
-                    #d97706
-                );
-
-            color: #0f172a;
-
-            padding:
-                9px 21px;
-
-            border-radius: 50px;
-
-            font-size: 15px;
-
-            font-weight: 900;
-
-            margin-bottom: 20px;
-
-            box-shadow:
-                0 5px 18px
-                rgba(245,158,11,.38);
-
-            animation:
-                pricePulse
-                2.3s
-                infinite
-                ease-in-out;
-        }
-
-        @keyframes pricePulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.035);
             }
         }
 
@@ -822,7 +841,7 @@
 
 
         /* =========================================
-           QUICK TOOLS (PERFECT BALANCE)
+           QUICK TOOLS (SHARE & SAVE CONTACT)
         ========================================= */
 
         .quick-tools {
@@ -1288,29 +1307,29 @@
         </p>
 
 
-        <!-- LIVE STATUS -->
+        <!-- BADGES SECTION (STACKED CLEANLY) -->
 
-        <div
-            class="live-status"
-            id="liveStatus"
-        >
+        <div class="badges-container">
 
-            <span class="status-dot"></span>
+            <!-- PRICE -->
+            <div
+                class="price-badge"
+                aria-label="أي طلبية بخمسة شيكل"
+            >
+                🔥 أي طلبية بـ 5 شيكل فقط
+            </div>
 
-            <span id="statusText">
-                جاري فحص الحالة...
-            </span>
+            <!-- LIVE STATUS -->
+            <div
+                class="live-status"
+                id="liveStatus"
+            >
+                <span class="status-dot"></span>
+                <span id="statusText">
+                    جاري فحص الحالة...
+                </span>
+            </div>
 
-        </div>
-
-
-        <!-- PRICE -->
-
-        <div
-            class="price-badge"
-            aria-label="أي طلبية بخمسة شيكل"
-        >
-            🔥 أي طلبية بـ 5 شيكل فقط
         </div>
 
 
@@ -1421,7 +1440,7 @@
         </button>
 
 
-        <!-- QUICK TOOLS (PERFECT BALANCE) -->
+        <!-- QUICK TOOLS (SHARE & SAVE CONTACT) -->
 
         <div class="quick-tools">
 
@@ -1619,7 +1638,7 @@
 
 
         /* =========================================
-           LIVE STATUS CHECKER (JSONBIN)
+           LIVE STATUS BACKGROUND ENGINE
         ========================================= */
 
         const liveStatusEl =
@@ -1628,16 +1647,26 @@
         const statusTextEl =
             document.getElementById("statusText");
 
+        let isCheckingStatus = false;
 
         async function updateLiveStatus() {
 
+            if (isCheckingStatus) return;
+            isCheckingStatus = true;
+
             try {
 
+                // طلب خفيف جداً في الخلفية فقط للحالة بدون إعادة تحميل أي شيء
                 const res =
                     await fetch(
                         `https://api.jsonbin.io/v3/b/${BIN_ID}/latest?t=${Date.now()}`,
                         {
-                            headers: { 'X-Master-Key': API_KEY }
+                            method: "GET",
+                            cache: "no-store",
+                            headers: {
+                                "X-Master-Key": API_KEY,
+                                "Cache-Control": "no-cache"
+                            }
                         }
                     );
 
@@ -1645,7 +1674,6 @@
 
                 const data =
                     await res.json();
-
 
                 if (data.record && data.record.active) {
 
@@ -1664,16 +1692,25 @@
 
             } catch (error) {
 
-                liveStatusEl.classList.remove("offline");
+                // في حال عدم توفر نت لحظي تبقى الحالة كما هي دون أي خطأ بالواجهة
+            } finally {
 
-                statusTextEl.textContent =
-                    "متاح للتوصيل الآن";
+                isCheckingStatus = false;
             }
         }
 
+        // فحص في الخلفية عند فتح الكرت
         updateLiveStatus();
 
-        setInterval(updateLiveStatus, 30000);
+        // فحص دوري خفيف في الخلفية كل 15 ثانية
+        setInterval(updateLiveStatus, 15000);
+
+        // فحص صامت فقط للحالة عند عودة الزبون للتبويب
+        document.addEventListener("visibilitychange", () => {
+            if (document.visibilityState === "visible") {
+                updateLiveStatus();
+            }
+        });
 
 
         /* =========================================
