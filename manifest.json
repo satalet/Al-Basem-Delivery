@@ -2,7 +2,7 @@
   "name": "بسكليتاتو الباسم",
   "short_name": "بسكليتاتو",
   "description": "خدمة توصيل سريعة في الرام وضاحية البريد وضاحية الأقباط",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -12,16 +12,16 @@
   "dir": "rtl",
   "icons": [
     {
-      "src": "poster.jpg",
-      "sizes": "192x192 512x512",
+      "src": "basem.jpg",
+      "sizes": "192x192",
       "type": "image/jpeg",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "basem.jpg",
-      "sizes": "192x192 512x512",
+      "sizes": "512x512",
       "type": "image/jpeg",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
