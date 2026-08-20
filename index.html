@@ -46,7 +46,7 @@
 
 
     <!-- ==============================
-         Facebook / WhatsApp
+         Facebook / WhatsApp Meta
     =============================== -->
 
     <meta
@@ -101,7 +101,7 @@
 
 
     <!-- ==============================
-         Twitter
+         Twitter Meta
     =============================== -->
 
     <meta
@@ -485,7 +485,7 @@
             gap: 7px;
 
             padding:
-                6px 12px;
+                6px 14px;
 
             margin-bottom: 17px;
 
@@ -503,6 +503,8 @@
             font-size: 12px;
 
             font-weight: 800;
+
+            transition: all .3s ease;
         }
 
         .status-dot {
@@ -522,6 +524,17 @@
                 statusBlink
                 1.8s
                 infinite;
+        }
+
+        .live-status.offline {
+            background: rgba(239,68,68,.12);
+            border-color: rgba(239,68,68,.40);
+            color: #fca5a5;
+        }
+
+        .live-status.offline .status-dot {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239,68,68,.85);
         }
 
         @keyframes statusBlink {
@@ -702,7 +715,7 @@
 
             border-radius: 14px;
 
-            margin-bottom: 12px;
+            margin-bottom: 14px;
 
             font-size: 13px;
 
@@ -720,7 +733,96 @@
 
 
         /* =========================================
-           QUICK TOOLS
+           PROMINENT LOCATION BUTTON
+        ========================================= */
+
+        .location-box-btn {
+
+            width: 100%;
+
+            min-height: 52px;
+
+            background:
+                rgba(59,130,246,.15);
+
+            border:
+                1.5px solid
+                rgba(96,165,250,.55);
+
+            border-radius: 15px;
+
+            padding:
+                10px 14px;
+
+            margin-bottom: 12px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 10px;
+
+            color: #93c5fd;
+
+            font-size: 13.5px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 4px 16px
+                rgba(59,130,246,.20);
+
+            transition:
+                all .2s ease;
+        }
+
+        .location-box-btn:hover {
+
+            background:
+                rgba(59,130,246,.25);
+
+            border-color: #60a5fa;
+
+            color: #fff;
+
+            transform: translateY(-2px);
+        }
+
+        .location-box-btn:active {
+
+            transform: scale(.97);
+        }
+
+        .loc-icon {
+
+            font-size: 22px;
+
+            animation:
+                bouncePin
+                2s
+                infinite;
+        }
+
+        @keyframes bouncePin {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+        }
+
+
+        /* =========================================
+           QUICK TOOLS (PERFECT BALANCE)
         ========================================= */
 
         .quick-tools {
@@ -728,7 +830,7 @@
             display: grid;
 
             grid-template-columns:
-                repeat(2,1fr);
+                repeat(2, 1fr);
 
             gap: 9px;
 
@@ -787,6 +889,26 @@
         .tool-icon {
 
             font-size: 18px;
+        }
+
+        .install-btn {
+
+            display: none;
+        }
+
+        .install-btn.show {
+
+            display: flex;
+
+            grid-column: span 2;
+
+            background:
+                rgba(16,185,129,.14);
+
+            border-color:
+                rgba(52,211,153,.40);
+
+            color: #6ee7b7;
         }
 
 
@@ -962,21 +1084,6 @@
 
 
         /* =========================================
-           INSTALL APP
-        ========================================= */
-
-        .install-btn {
-
-            display: none;
-        }
-
-        .install-btn.show {
-
-            display: flex;
-        }
-
-
-        /* =========================================
            TOAST
         ========================================= */
 
@@ -1070,6 +1177,10 @@
                 font-size: 12px;
             }
 
+            .location-box-btn {
+                font-size: 12.5px;
+            }
+
             .floating-whatsapp {
 
                 width: 50px;
@@ -1082,7 +1193,7 @@
 
 
         /* =========================================
-           ACCESSIBILITY
+           ACCESSIBILITY & REDUCE MOTION
         ========================================= */
 
         a:focus-visible,
@@ -1094,11 +1205,6 @@
 
             outline-offset: 3px;
         }
-
-
-        /* =========================================
-           REDUCE MOTION
-        ========================================= */
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -1192,7 +1298,7 @@
             <span class="status-dot"></span>
 
             <span id="statusText">
-                متاح للتوصيل الآن
+                جاري فحص الحالة...
             </span>
 
         </div>
@@ -1297,29 +1403,27 @@
         </div>
 
 
-        <!-- QUICK TOOLS -->
+        <!-- PROMINENT LOCATION BUTTON -->
+
+        <button
+            class="location-box-btn"
+            type="button"
+            id="locationBtn"
+            aria-label="اضغط هنا لإرسال موقعك"
+        >
+
+            <span class="loc-icon">📍</span>
+
+            <span>
+                اضغط هنا لإرسال موقعك بالتحديد
+            </span>
+
+        </button>
+
+
+        <!-- QUICK TOOLS (PERFECT BALANCE) -->
 
         <div class="quick-tools">
-
-
-            <!-- LOCATION -->
-
-            <button
-                class="tool-btn"
-                type="button"
-                id="locationBtn"
-                aria-label="إرسال موقعي"
-            >
-
-                <span class="tool-icon">
-                    📍
-                </span>
-
-                <span>
-                    أرسل موقعي
-                </span>
-
-            </button>
 
 
             <!-- SHARE -->
@@ -1342,7 +1446,27 @@
             </button>
 
 
-            <!-- INSTALL -->
+            <!-- SAVE CONTACT -->
+
+            <button
+                class="tool-btn"
+                type="button"
+                id="saveContactBtn"
+                aria-label="حفظ الرقم بالهاتف"
+            >
+
+                <span class="tool-icon">
+                    📇
+                </span>
+
+                <span>
+                    حفظ الرقم بالهاتف
+                </span>
+
+            </button>
+
+
+            <!-- INSTALL (SHOWS ONLY WHEN SUPPORTED) -->
 
             <button
                 class="tool-btn install-btn"
@@ -1356,27 +1480,7 @@
                 </span>
 
                 <span>
-                    أضف للشاشة
-                </span>
-
-            </button>
-
-
-            <!-- COPY -->
-
-            <button
-                class="tool-btn"
-                type="button"
-                id="copyBtn"
-                aria-label="نسخ رابط الكرت"
-            >
-
-                <span class="tool-icon">
-                    🔗
-                </span>
-
-                <span>
-                    انسخ الرابط
+                    تثبيت التطبيق على الشاشة
                 </span>
 
             </button>
@@ -1476,13 +1580,16 @@
     <script>
 
         /* =========================================
-           CONFIG
+           CONFIG & API KEYS
         ========================================= */
 
         const WHATSAPP_NUMBER = "972523260604";
 
         const SITE_URL =
             "https://satalet.github.io/Al-Basem-Delivery/";
+
+        const BIN_ID = "6a875d9cda38895dfefcc10c";
+        const API_KEY = "$2a$10$p55UIZYJHw6qcxqULfVK0e7EA7ufzRBozx6.yc7PgE2xU/FBqrCEi";
 
 
         /* =========================================
@@ -1512,6 +1619,124 @@
 
 
         /* =========================================
+           LIVE STATUS CHECKER (JSONBIN)
+        ========================================= */
+
+        const liveStatusEl =
+            document.getElementById("liveStatus");
+
+        const statusTextEl =
+            document.getElementById("statusText");
+
+
+        async function updateLiveStatus() {
+
+            try {
+
+                const res =
+                    await fetch(
+                        `https://api.jsonbin.io/v3/b/${BIN_ID}/latest?t=${Date.now()}`,
+                        {
+                            headers: { 'X-Master-Key': API_KEY }
+                        }
+                    );
+
+                if (!res.ok) throw new Error();
+
+                const data =
+                    await res.json();
+
+
+                if (data.record && data.record.active) {
+
+                    liveStatusEl.classList.remove("offline");
+
+                    statusTextEl.textContent =
+                        "متاح للتوصيل الآن ⚡";
+
+                } else {
+
+                    liveStatusEl.classList.add("offline");
+
+                    statusTextEl.textContent =
+                        "غير متاح حالياً 🌙";
+                }
+
+            } catch (error) {
+
+                liveStatusEl.classList.remove("offline");
+
+                statusTextEl.textContent =
+                    "متاح للتوصيل الآن";
+            }
+        }
+
+        updateLiveStatus();
+
+        setInterval(updateLiveStatus, 30000);
+
+
+        /* =========================================
+           SAVE CONTACT (VCARD)
+        ========================================= */
+
+        const saveContactBtn =
+            document.getElementById("saveContactBtn");
+
+        saveContactBtn.addEventListener(
+            "click",
+            function() {
+
+                const vcardData =
+`BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:الباسم;بسكليتاتو;;;
+FN;CHARSET=UTF-8:بسكليتاتو الباسم
+ORG;CHARSET=UTF-8:خدمة التوصيل السريع
+TEL;TYPE=CELL,VOICE:+972523260604
+NOTE;CHARSET=UTF-8:توصيل سريع في الرام وضاحية البريد والأقباط بـ 5 شيكل فقط
+URL:https://satalet.github.io/Al-Basem-Delivery/
+END:VCARD`;
+
+                const blob =
+                    new Blob(
+                        [vcardData],
+                        { type: "text/vcard;charset=utf-8;" }
+                    );
+
+                const url =
+                    URL.createObjectURL(blob);
+
+                const downloadLink =
+                    document.createElement("a");
+
+                downloadLink.href = url;
+
+                downloadLink.setAttribute(
+                    "download",
+                    "بسكليتاتو_الباسم.vcf"
+                );
+
+                document.body.appendChild(
+                    downloadLink
+                );
+
+                downloadLink.click();
+
+                document.body.removeChild(
+                    downloadLink
+                );
+
+                URL.revokeObjectURL(url);
+
+                showToast(
+                    "جاري حفظ جهة الاتصال بهاتفك 📇"
+                );
+            }
+        );
+
+
+        /* =========================================
            LOCATION
         ========================================= */
 
@@ -1535,8 +1760,8 @@
 
             locationBtn.innerHTML =
                 `
-                <span class="tool-icon">⏳</span>
-                <span>جاري تحديد موقعك...</span>
+                <span class="loc-icon">⏳</span>
+                <span>جاري تحديد موقعك بدقة...</span>
                 `;
 
 
@@ -1576,6 +1801,14 @@
                         window.location.href =
                             whatsappUrl;
 
+                        locationBtn.disabled = false;
+
+                        locationBtn.innerHTML =
+                            `
+                            <span class="loc-icon">📍</span>
+                            <span>اضغط هنا لإرسال موقعك بالتحديد</span>
+                            `;
+
                     }, 500);
 
                 },
@@ -1589,21 +1822,21 @@
                     if (error.code === 1) {
 
                         message =
-                            "لازم تسمح للموقع بالوصول إلى موقعك 📍";
+                            "لازم تسمح للمتصفح بالوصول إلى موقعك 📍";
 
                     }
 
                     if (error.code === 2) {
 
                         message =
-                            "تعذر تحديد موقعك، حاول مرة ثانية.";
+                            "تعذر تحديد الموقع، تأكد من تفعيل الـ GPS.";
 
                     }
 
                     if (error.code === 3) {
 
                         message =
-                            "انتهت مهلة تحديد الموقع، حاول مرة ثانية.";
+                            "انتهت مهلة تحديد الموقع، حاول مجدداً.";
 
                     }
 
@@ -1614,8 +1847,8 @@
 
                     locationBtn.innerHTML =
                         `
-                        <span class="tool-icon">📍</span>
-                        <span>أرسل موقعي</span>
+                        <span class="loc-icon">📍</span>
+                        <span>اضغط هنا لإرسال موقعك بالتحديد</span>
                         `;
                 },
 
@@ -1702,40 +1935,7 @@
 
 
         /* =========================================
-           COPY LINK
-        ========================================= */
-
-        const copyBtn =
-            document.getElementById("copyBtn");
-
-
-        copyBtn.addEventListener(
-            "click",
-            async function() {
-
-                try {
-
-                    await navigator.clipboard.writeText(
-                        SITE_URL
-                    );
-
-                    showToast(
-                        "تم نسخ رابط الكرت بنجاح 🔗"
-                    );
-
-                } catch (error) {
-
-                    showToast(
-                        "ما قدرنا ننسخ الرابط تلقائيًا."
-                    );
-                }
-
-            }
-        );
-
-
-        /* =========================================
-           PWA INSTALL
+           PWA INSTALL PROMPT
         ========================================= */
 
         let deferredPrompt = null;
@@ -1765,7 +1965,7 @@
                 if (!deferredPrompt) {
 
                     showToast(
-                        "إذا ما ظهر التثبيت، استخدم قائمة المتصفح ثم إضافة للشاشة الرئيسية."
+                        "استخدم خيارات المتصفح ثم (إضافة إلى الشاشة الرئيسية)."
                     );
 
                     return;
@@ -1805,7 +2005,7 @@
             function() {
 
                 showToast(
-                    "تم تثبيت بسكليتاتو الباسم 📲"
+                    "تم تثبيت بسكليتاتو الباسم بنجاح 📲"
                 );
 
             }
@@ -1829,7 +2029,7 @@
                         .catch(function(error) {
 
                             console.log(
-                                "Service Worker:",
+                                "Service Worker Error:",
                                 error
                             );
 
@@ -1838,28 +2038,6 @@
                 }
             );
         }
-
-
-        /* =========================================
-           LIVE STATUS
-        ========================================= */
-
-        /*
-           الحالة الحالية:
-           الخدمة متاحة.
-           
-           لاحقًا إذا أعطيتني ساعات العمل
-           نقدر نخليها تتغير تلقائيًا.
-        */
-
-        const statusText =
-            document.getElementById(
-                "statusText"
-            );
-
-        statusText.textContent =
-            "متاح للتوصيل الآن";
-
 
     </script>
 
