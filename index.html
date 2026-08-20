@@ -160,7 +160,7 @@
             justify-content: center;
             align-items: center;
 
-            padding: 18px 15px;
+            padding: 18px 15px 90px;
 
             overflow-x: hidden;
 
@@ -1067,6 +1067,7 @@
             display: flex;
 
             align-items: center;
+
             justify-content: center;
 
             border-radius: 50%;
@@ -1103,6 +1104,150 @@
 
 
         /* =========================================
+           AUTO INSTALL POPUP BANNER
+        ========================================= */
+
+        .install-popup {
+
+            position: fixed;
+
+            bottom: 20px;
+
+            left: 50%;
+
+            transform:
+                translate(-50%, 160%);
+
+            width:
+                min(92%, 400px);
+
+            background:
+                rgba(15, 23, 42, 0.96);
+
+            border:
+                1.5px solid #10b981;
+
+            border-radius: 20px;
+
+            padding: 14px 16px;
+
+            z-index: 1000;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.65);
+
+            backdrop-filter: blur(20px);
+
+            -webkit-backdrop-filter: blur(20px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            transition:
+                transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .install-popup.active {
+
+            transform:
+                translate(-50%, 0);
+        }
+
+        .install-popup-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            text-align: right;
+        }
+
+        .install-popup-img {
+
+            width: 44px;
+
+            height: 44px;
+
+            border-radius: 12px;
+
+            border: 2px solid #10b981;
+
+            object-fit: cover;
+        }
+
+        .install-popup-title {
+
+            font-size: 13.5px;
+
+            font-weight: 900;
+
+            color: #fff;
+        }
+
+        .install-popup-sub {
+
+            font-size: 11.5px;
+
+            color: #94a3b8;
+        }
+
+        .install-popup-btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #10b981,
+                    #059669
+                );
+
+            color: #fff;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 9px 14px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            box-shadow:
+                0 4px 12px
+                rgba(16,185,129,0.35);
+        }
+
+        .install-popup-close {
+
+            background: none;
+
+            border: none;
+
+            color: #64748b;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            padding: 4px;
+
+            line-height: 1;
+        }
+
+
+        /* =========================================
            TOAST
         ========================================= */
 
@@ -1117,7 +1262,7 @@
             transform:
                 translate(-50%,20px);
 
-            z-index: 100;
+            z-index: 1100;
 
             width:
                 min(90%,360px);
@@ -1171,7 +1316,7 @@
 
             body {
                 padding:
-                    13px 10px;
+                    13px 10px 85px;
             }
 
             .card {
@@ -1185,6 +1330,7 @@
             .avatar-wrapper {
 
                 width: 108px;
+
                 height: 108px;
             }
 
@@ -1203,9 +1349,11 @@
             .floating-whatsapp {
 
                 width: 50px;
+
                 height: 50px;
 
                 left: 12px;
+
                 bottom: 12px;
             }
         }
@@ -1586,6 +1734,57 @@
     </a>
 
 
+    <!-- AUTO INSTALL POPUP -->
+
+    <div
+        class="install-popup"
+        id="installPopup"
+    >
+
+        <div class="install-popup-info">
+
+            <img
+                src="basem.jpg"
+                alt="بسكليتاتو الباسم"
+                class="install-popup-img"
+            >
+
+            <div>
+
+                <div class="install-popup-title">
+                    تطبيق بسكليتاتو الباسم
+                </div>
+
+                <div class="install-popup-sub">
+                    ثبّته لشاشة هاتفك لطلب فوري ⚡
+                </div>
+
+            </div>
+
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 6px;">
+
+            <button
+                class="install-popup-btn"
+                id="popupInstallBtn"
+            >
+                تثبيت 📲
+            </button>
+
+            <button
+                class="install-popup-close"
+                id="popupCloseBtn"
+                aria-label="إغلاق"
+            >
+                ✕
+            </button>
+
+        </div>
+
+    </div>
+
+
     <!-- TOAST -->
 
     <div
@@ -1638,7 +1837,7 @@
 
 
         /* =========================================
-           LIVE STATUS BACKGROUND ENGINE
+           LIVE STATUS SILENT ENGINE
         ========================================= */
 
         const liveStatusEl =
@@ -1656,7 +1855,6 @@
 
             try {
 
-                // طلب خفيف جداً في الخلفية فقط للحالة بدون إعادة تحميل أي شيء
                 const res =
                     await fetch(
                         `https://api.jsonbin.io/v3/b/${BIN_ID}/latest?t=${Date.now()}`,
@@ -1665,7 +1863,8 @@
                             cache: "no-store",
                             headers: {
                                 "X-Master-Key": API_KEY,
-                                "Cache-Control": "no-cache"
+                                "Cache-Control": "no-cache, no-store, must-revalidate",
+                                "Pragma": "no-cache"
                             }
                         }
                     );
@@ -1692,25 +1891,28 @@
 
             } catch (error) {
 
-                // في حال عدم توفر نت لحظي تبقى الحالة كما هي دون أي خطأ بالواجهة
+                // في حال عدم توفر نت لحظي تبقى الحالة كما هي دون أي خطأ
             } finally {
 
                 isCheckingStatus = false;
             }
         }
 
-        // فحص في الخلفية عند فتح الكرت
+        // فحص أولي فوري
         updateLiveStatus();
 
-        // فحص دوري خفيف في الخلفية كل 15 ثانية
-        setInterval(updateLiveStatus, 15000);
+        // فحص صامت في الخلفية كل 10 ثوانٍ
+        setInterval(updateLiveStatus, 10000);
 
-        // فحص صامت فقط للحالة عند عودة الزبون للتبويب
+        // فحص عند عودة الزبون للتبويب أو فتح قفل الشاشة
         document.addEventListener("visibilitychange", () => {
             if (document.visibilityState === "visible") {
                 updateLiveStatus();
             }
         });
+
+        window.addEventListener("focus", updateLiveStatus);
+        window.addEventListener("online", updateLiveStatus);
 
 
         /* =========================================
@@ -1972,13 +2174,37 @@ END:VCARD`;
 
 
         /* =========================================
-           PWA INSTALL PROMPT
+           PWA AUTO INSTALL ENGINE
         ========================================= */
 
-        let deferredPrompt = null;
+        let deferredInstallPrompt = null;
+
+        const installPopup =
+            document.getElementById("installPopup");
+
+        const popupInstallBtn =
+            document.getElementById("popupInstallBtn");
+
+        const popupCloseBtn =
+            document.getElementById("popupCloseBtn");
 
         const installBtn =
             document.getElementById("installBtn");
+
+
+        const isStandalone =
+            window.matchMedia('(display-mode: standalone)').matches ||
+            window.navigator.standalone;
+
+
+        if (!isStandalone && !sessionStorage.getItem("dismiss_install")) {
+
+            setTimeout(() => {
+
+                installPopup.classList.add("active");
+
+            }, 3000);
+        }
 
 
         window.addEventListener(
@@ -1987,50 +2213,89 @@ END:VCARD`;
 
                 event.preventDefault();
 
-                deferredPrompt = event;
+                deferredInstallPrompt = event;
 
-                installBtn.classList.add("show");
+                if (installBtn) {
+                    installBtn.classList.add("show");
+                }
+
+                if (!sessionStorage.getItem("dismiss_install") && !isStandalone) {
+
+                    installPopup.classList.add("active");
+                }
 
             }
         );
 
 
-        installBtn.addEventListener(
+        popupInstallBtn.addEventListener(
             "click",
             async function() {
 
-                if (!deferredPrompt) {
+                if (deferredInstallPrompt) {
 
-                    showToast(
-                        "استخدم خيارات المتصفح ثم (إضافة إلى الشاشة الرئيسية)."
-                    );
+                    deferredInstallPrompt.prompt();
 
-                    return;
+                    const choice =
+                        await deferredInstallPrompt.userChoice;
+
+                    if (choice.outcome === "accepted") {
+
+                        showToast(
+                            "تم تثبيت بسكليتاتو الباسم 📲"
+                        );
+                    }
+
+                    deferredInstallPrompt = null;
+
+                    installPopup.classList.remove("active");
+
+                } else {
+
+                    const isIOS =
+                        /iPad|iPhone|iPod/.test(navigator.userAgent) &&
+                        !window.MSStream;
+
+                    if (isIOS) {
+
+                        showToast(
+                            "اضغط على زر المشاركة ⎋ أسفل الشاشة ثم (إضافة إلى الشاشة الرئيسية ➕)"
+                        );
+
+                    } else {
+
+                        showToast(
+                            "اضغط على خيارات المتصفح (⋮) ثم (إضافة إلى الشاشة الرئيسية)"
+                        );
+                    }
                 }
 
-
-                deferredPrompt.prompt();
-
-
-                const result =
-                    await deferredPrompt.userChoice;
+            }
+        );
 
 
-                if (
-                    result.outcome ===
-                    "accepted"
-                ) {
+        if (installBtn) {
 
-                    showToast(
-                        "تمت إضافة بسكليتاتو الباسم للشاشة 📲"
-                    );
+            installBtn.addEventListener(
+                "click",
+                function() {
+
+                    popupInstallBtn.click();
+
                 }
+            );
+        }
 
 
-                deferredPrompt = null;
+        popupCloseBtn.addEventListener(
+            "click",
+            function() {
 
-                installBtn.classList.remove(
-                    "show"
+                installPopup.classList.remove("active");
+
+                sessionStorage.setItem(
+                    "dismiss_install",
+                    "true"
                 );
 
             }
@@ -2040,6 +2305,8 @@ END:VCARD`;
         window.addEventListener(
             "appinstalled",
             function() {
+
+                installPopup.classList.remove("active");
 
                 showToast(
                     "تم تثبيت بسكليتاتو الباسم بنجاح 📲"
