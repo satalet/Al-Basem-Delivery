@@ -4,75 +4,201 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>لوحة التحكم والإحصائيات | بسكليتاتو الباسم</title>
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <style>
-        /* (نفس تنسيقاتك القديمة مع إضافة تنسيق الإحصائيات) */
-        body { background: #0f172a; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; font-family: system-ui, sans-serif; }
-        .admin-card { background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 28px 20px; width: 100%; max-width: 400px; backdrop-filter: blur(15px); }
-        h2 { color: #6ee7b7; margin-bottom: 15px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-        .stat-box { background: rgba(15,23,42,0.6); padding: 10px; border-radius: 12px; font-size: 12px; }
-        .stat-val { display: block; font-size: 18px; font-weight: bold; color: #3b82f6; }
-        .current-status { padding: 12px; border-radius: 14px; margin-bottom: 20px; font-weight: bold; }
-        .status-on { background: rgba(16,185,129,0.2); color: #6ee7b7; border: 1px solid #10b981; }
-        .status-off { background: rgba(239,68,68,0.2); color: #fca5a5; border: 1px solid #ef4444; }
-        .btn-status { width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px; border: none; font-weight: bold; cursor: pointer; color: #fff; }
-        .btn-online { background: #10b981; }
-        .btn-offline { background: #ef4444; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: #0f172a; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .admin-card { background: rgba(30, 41, 59, 0.75); border: 1px solid rgba(255,255,255,0.15); border-radius: 24px; padding: 28px 20px; width: 100%; max-width: 400px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
+        h2 { font-size: 22px; margin-bottom: 8px; color: #6ee7b7; }
+        p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
+        
+        .pin-container { display: flex; flex-direction: column; gap: 14px; }
+        .pin-input { width: 100%; padding: 14px; text-align: center; font-size: 24px; letter-spacing: 6px; border-radius: 14px; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(15,23,42,0.8); color: #fff; outline: none; }
+        .pin-input:focus { border-color: #10b981; }
+        .remember-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; color: #cbd5e1; cursor: pointer; }
+        .btn-unlock { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; border: none; border-radius: 14px; padding: 14px; font-size: 16px; font-weight: 800; cursor: pointer; }
+        
+        .dashboard-content { display: none; }
+        
+        /* تصميم مربعات الإحصائيات */
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+        .stat-box { background: rgba(15,23,42,0.6); padding: 10px 6px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; color: #94a3b8; }
+        .stat-val { display: block; font-size: 18px; font-weight: 900; color: #38bdf8; margin-top: 4px; }
+
+        .current-status { padding: 14px; border-radius: 14px; font-weight: 800; font-size: 14px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); transition: all .3s ease; }
+        .status-on { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; border-color: #10b981; }
+        .status-off { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: #ef4444; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn-status { border: none; border-radius: 14px; padding: 14px; font-size: 15px; font-weight: 900; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; color: #fff; }
+        .btn-online { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        .btn-offline { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
+        .btn-status:active { transform: scale(0.97); }
+        .toast { margin-top: 15px; font-size: 12.5px; font-weight: 700; min-height: 20px; color: #fbbf24; }
     </style>
 </head>
 <body>
+
     <div class="admin-card">
+
+        <!-- شاشة تسجيل الدخول -->
         <div id="lockScreen">
-            <input type="password" id="pinInput" placeholder="الرمز السري" class="pin-input" style="width:100%; padding:10px; border-radius:8px;">
-            <button onclick="checkPin()" style="width:100%; padding:10px; margin-top:10px; cursor:pointer;">دخول</button>
-        </div>
-        <div id="dashboardScreen" style="display:none;">
-            <h2>📊 إحصائيات بسكليتاتو</h2>
-            <div class="stats-grid">
-                <div class="stat-box">الزيارات<span id="views" class="stat-val">0</span></div>
-                <div class="stat-box">واتساب<span id="wa" class="stat-val">0</span></div>
-                <div class="stat-box">اتصال<span id="call" class="stat-val">0</span></div>
+            <h2>🔒 صفحة محمية</h2>
+            <p>أدخل الرمز السري للتحكم والإحصائيات</p>
+            
+            <div class="pin-container">
+                <input type="password" id="pinInput" class="pin-input" placeholder="••••" maxlength="6" inputmode="numeric">
+                
+                <label class="remember-wrap">
+                    <input type="checkbox" id="rememberMe" checked>
+                    <span>تذكر هذا الجهاز</span>
+                </label>
+
+                <button class="btn-unlock" onclick="checkPin()">دخول 🔓</button>
             </div>
-            <div id="statusBox" class="current-status">جارِ الفحص...</div>
-            <button class="btn-status btn-online" onclick="updateData(true)">🟢 متاح</button>
-            <button class="btn-status btn-offline" onclick="updateData(false)">🔴 غير متاح</button>
         </div>
+
+        <!-- لوحة التحكم والإحصائيات -->
+        <div id="dashboardScreen" class="dashboard-content">
+            <h2>📊 لوحة تحكم الباسم</h2>
+            <p>متابعة التفاعلات وتغيير حالة التوصيل</p>
+
+            <!-- عدادات الإحصائيات الحقيقية -->
+            <div class="stats-grid">
+                <div class="stat-box">الزيارات<span id="viewsVal" class="stat-val">0</span></div>
+                <div class="stat-box">واتساب<span id="waVal" class="stat-val">0</span></div>
+                <div class="stat-box">اتصال<span id="callVal" class="stat-val">0</span></div>
+            </div>
+
+            <div id="statusBox" class="current-status status-on">
+                الحالة الحالية: جارِ الفحص...
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-status btn-online" onclick="setStatus(true)">
+                    <span>🟢</span>
+                    <span>أنا متاح وشغال الآن</span>
+                </button>
+
+                <button class="btn-status btn-offline" onclick="setStatus(false)">
+                    <span>🔴</span>
+                    <span>غير متاح (موقف شغل)</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="toast" class="toast"></div>
     </div>
 
     <script>
+        const SECRET_PIN = "201412";
         const BIN_ID = "6a875d9cda38895dfefcc10c";
         const API_KEY = "$2a$10$p55UIZYJHw6qcxqULfVK0e7EA7ufzRBozx6.yc7PgE2xU/FBqrCEi";
 
-        async function loadData() {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} });
-            const data = (await res.json()).record;
-            document.getElementById('views').textContent = data.views || 0;
-            document.getElementById('wa').textContent = data.whatsapp_clicks || 0;
-            document.getElementById('call').textContent = data.call_clicks || 0;
-            const statusBox = document.getElementById('statusBox');
-            statusBox.textContent = data.active ? "الحالة: متاح 🟢" : "الحالة: غير متاح 🔴";
-            statusBox.className = "current-status " + (data.active ? "status-on" : "status-off");
-        }
+        const lockScreen = document.getElementById("lockScreen");
+        const dashboardScreen = document.getElementById("dashboardScreen");
+        const pinInput = document.getElementById("pinInput");
+        const rememberMe = document.getElementById("rememberMe");
+        const statusBox = document.getElementById("statusBox");
+        const toast = document.getElementById("toast");
 
-        async function updateData(isActive) {
-            const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} });
-            let current = (await res.json()).record;
-            current.active = isActive;
-            await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json', 'X-Master-Key': API_KEY},
-                body: JSON.stringify(current)
-            });
-            loadData();
+        if (localStorage.getItem("basem_admin_auth") === SECRET_PIN) {
+            unlockDashboard();
         }
 
         function checkPin() {
-            if(document.getElementById('pinInput').value === "201412") {
-                document.getElementById('lockScreen').style.display = 'none';
-                document.getElementById('dashboardScreen').style.display = 'block';
-                loadData();
+            if (pinInput.value === SECRET_PIN) {
+                if (rememberMe.checked) {
+                    localStorage.setItem("basem_admin_auth", SECRET_PIN);
+                }
+                unlockDashboard();
+            } else {
+                toast.textContent = "❌ الرمز السري غير صحيح!";
+                pinInput.value = "";
+                setTimeout(() => { toast.textContent = ""; }, 2500);
             }
         }
+
+        function unlockDashboard() {
+            lockScreen.style.display = "none";
+            dashboardScreen.style.display = "block";
+            loadDashboardData();
+        }
+
+        // جلب وعرض البيانات الحقيقية (الحالة والعدادات)
+        async function loadDashboardData() {
+            try {
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest?t=${Date.now()}`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                const data = await res.json();
+                const record = data.record || {};
+
+                // عرض العدادات
+                document.getElementById("viewsVal").textContent = record.views || 0;
+                document.getElementById("waVal").textContent = record.whatsapp_clicks || 0;
+                document.getElementById("callVal").textContent = record.call_clicks || 0;
+
+                // عرض الحالة
+                renderStatus(record.active);
+            } catch (e) {
+                statusBox.textContent = "تعذر جلب البيانات الحالية";
+            }
+        }
+
+        function renderStatus(isActive) {
+            if (isActive) {
+                statusBox.className = "current-status status-on";
+                statusBox.textContent = "الحالة الحالية: متاح للتوصيل 🟢";
+            } else {
+                statusBox.className = "current-status status-off";
+                statusBox.textContent = "الحالة الحالية: غير متاح حالياً 🔴";
+            }
+        }
+
+        // دالة تغيير الحالة بأمان تام (دون التأثير على الإحصائيات)
+        async function setStatus(isActive) {
+            toast.textContent = "جاري تحديث الحالة...";
+            try {
+                // 1. سحب البيانات الحالية أولاً للحفاظ على العدادات كما هي
+                const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': API_KEY }
+                });
+                const currentData = (await getRes.json()).record || {};
+
+                // 2. تحديث حالة الـ active فقط
+                currentData.active = isActive;
+
+                // 3. إعادة إرسال الكيان كاملاً ومحدثاً
+                const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify(currentData)
+                });
+
+                if (res.ok) {
+                    renderStatus(isActive);
+                    toast.textContent = "✅ تم تحديث حالتك بنجاح!";
+                } else {
+                    toast.textContent = "❌ حدث خطأ، تأكد من الاتصال.";
+                }
+            } catch (e) {
+                toast.textContent = "❌ تعذر الاتصال بالخادم.";
+            }
+
+            setTimeout(() => { toast.textContent = ""; }, 3500);
+        }
+
+        pinInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") checkPin();
+        });
     </script>
 </body>
 </html>
+```[cite: 2]
+
+نسخ كامل وملف نظيف وجاهز بدون أي نواقص أو تخبيص! انسخه استبدله بملف `admin.html` عندك وارفع الشغل للـ GitHub، وهيك أمور اللوحة والإحصائيات وتغيير الحالة صارت مرتبة 100%.
