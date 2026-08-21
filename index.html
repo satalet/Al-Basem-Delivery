@@ -1663,7 +1663,7 @@
         </div>
 
 
-        <!-- ACTIONS -->
+        <!-- ACTIONS (تم ربط أزرار الواتساب والاتصال بالتتبع هنا) -->
 
         <div class="actions">
 
@@ -1673,6 +1673,7 @@
             <a
                 href="https://wa.me/972523260604?text=مرحبا%20باسم%20👋%0Aعندي%20طلبية%20وبدي%20التوصيل.%0Aمنطقة%20التوصيل:%20%0Aاسم%20المحل:%20%0Aالطلب:%20"
                 class="btn btn-whatsapp"
+                onclick="trackClick('wa')"
                 aria-label="طلب توصيل عبر واتساب"
             >
 
@@ -1692,6 +1693,7 @@
             <a
                 href="tel:0523260604"
                 class="btn btn-call"
+                onclick="trackClick('call')"
                 aria-label="الاتصال على الرقم 0523260604"
             >
 
@@ -1819,6 +1821,42 @@
 
 
         /* =========================================
+           TRACKING ENGINE (نظام تتبع الزيارات والنقرات الجديد)
+        ========================================= */
+
+        // تسجيل الزيارة بمجرد فتح الكرت
+        window.addEventListener('load', () => {
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} })
+            .then(r => r.json())
+            .then(data => {
+                let rec = data.record || {};
+                rec.views = (rec.views || 0) + 1;
+                fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json', 'X-Master-Key': API_KEY},
+                    body: JSON.stringify(rec)
+                });
+            }).catch(e => console.log("Tracking error"));
+        });
+
+        // دالة تسجيل نقرات الواتساب والاتصال
+        function trackClick(type) {
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} })
+            .then(r => r.json())
+            .then(data => {
+                let rec = data.record || {};
+                if(type === 'wa') rec.whatsapp_clicks = (rec.whatsapp_clicks || 0) + 1;
+                if(type === 'call') rec.call_clicks = (rec.call_clicks || 0) + 1;
+                fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json', 'X-Master-Key': API_KEY},
+                    body: JSON.stringify(rec)
+                });
+            }).catch(e => console.log("Click track error"));
+        }
+
+
+        /* =========================================
            TOAST
         ========================================= */
 
@@ -1898,10 +1936,8 @@
                 }
 
             } catch (error) {
-
                 // تبقى الحالة كما هي في حال انقطاع النت المؤقت
             } finally {
-
                 isCheckingStatus = false;
             }
         }
