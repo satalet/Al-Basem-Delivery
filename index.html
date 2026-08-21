@@ -4,69 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بسكليتاتو الباسم 🚴‍♂️⚡ | خدمة التوصيل السريع</title>
-    <!-- (باقي الميتا والستايل زي ما هي عندك تماماً) -->
+    <meta name="description" content="بسكليتاتو الباسم 🚴‍♂️⚡ خدمة توصيل سريعة إلى باب بيتك. أي طلبية بـ 5 شيكل فقط في الرام.">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/png" href="favicon-32x32.png">
+    <link rel="manifest" href="manifest.json">
     <style>
-        /* ... هنا الستايل الخاص فيك ... */
+        /* الستايل الأصلي الخاص بك */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: #0f172a; color: #fff; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 18px 15px 90px; }
+        .card { width: 100%; max-width: 420px; padding: 30px; background: rgba(15,23,42,.68); backdrop-filter: blur(20px); border-radius: 28px; border: 1px solid rgba(255,255,255,.15); text-align: center; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 13px; border-radius: 14px; font-weight: 900; text-decoration: none; margin-top: 10px; color: #fff; }
+        .btn-whatsapp { background: linear-gradient(135deg, #25d366, #128c7e); }
+        .btn-call { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
     </style>
 </head>
 <body>
-    <!-- (هنا محتوى الـ Body الخاص فيك كما هو) -->
 
-    <!-- تحديث روابط الأزرار لتدعم التتبع -->
-    <div class="actions">
-        <a href="https://wa.me/972523260604?text=مرحبا%20باسم%20👋" 
-           class="btn btn-whatsapp" 
-           onclick="trackClick('wa')">
-            💬 اطلب فوراً ع الواتساب
-        </a>
-        <a href="tel:0523260604" 
-           class="btn btn-call" 
-           onclick="trackClick('call')">
-            📞 اتصال: 0523260604
-        </a>
-    </div>
+    <main class="card">
+        <h1>بسكليتاتو الباسم 🚴‍♂️</h1>
+        <p>خدمة توصيل سريعة • لباب بيتك 🏡</p>
 
-    <!-- السكريبت الموحد والكامل -->
+        <div class="actions">
+            <!-- أزرار التتبع -->
+            <a href="https://wa.me/972523260604?text=مرحبا%20باسم%20👋" 
+               class="btn btn-whatsapp" 
+               onclick="trackClick('wa')">💬 اطلب فوراً ع الواتساب</a>
+
+            <a href="tel:0523260604" 
+               class="btn btn-call" 
+               onclick="trackClick('call')">📞 اتصال: 0523260604</a>
+        </div>
+    </main>
+
     <script>
         const BIN_ID = "6a875d9cda38895dfefcc10c";
         const API_KEY = "$2a$10$p55UIZYJHw6qcxqULfVK0e7EA7ufzRBozx6.yc7PgE2xU/FBqrCEi";
 
-        // 1. تسجيل الزيارة فور تحميل الصفحة
+        // تسجيل الزيارة
         window.addEventListener('load', () => {
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { 
-                headers: { 'X-Master-Key': API_KEY } 
-            })
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} })
             .then(r => r.json())
             .then(data => {
                 let rec = data.record || {};
                 rec.views = (rec.views || 0) + 1;
-                return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    headers: {'Content-Type': 'application/json', 'X-Master-Key': API_KEY},
                     body: JSON.stringify(rec)
                 });
-            }).catch(e => console.log("Tracking error"));
+            });
         });
 
-        // 2. تسجيل النقرات
+        // تسجيل النقرات
         function trackClick(type) {
-            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { 
-                headers: { 'X-Master-Key': API_KEY } 
-            })
+            fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, { headers: {'X-Master-Key': API_KEY} })
             .then(r => r.json())
             .then(data => {
                 let rec = data.record || {};
-                if (type === 'wa') rec.whatsapp_clicks = (rec.whatsapp_clicks || 0) + 1;
-                if (type === 'call') rec.call_clicks = (rec.call_clicks || 0) + 1;
-                return fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                if(type === 'wa') rec.whatsapp_clicks = (rec.whatsapp_clicks || 0) + 1;
+                if(type === 'call') rec.call_clicks = (rec.call_clicks || 0) + 1;
+                fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                     method: 'PUT',
-                    headers: { 'Content-Type': 'application/json', 'X-Master-Key': API_KEY },
+                    headers: {'Content-Type': 'application/json', 'X-Master-Key': API_KEY},
                     body: JSON.stringify(rec)
                 });
-            }).catch(e => console.log("Click track error"));
+            });
         }
-
-        // ... (باقي السكريبتات الخاصة بك مثل الـ Service Worker والـ Install) ...
     </script>
 </body>
 </html>
