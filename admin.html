@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم والإحصائيات | بسكليتاتو الباسم</title>
+    <title>لوحة تحكم الباسم | الإحصائيات</title>
     <meta name="theme-color" content="#0f172a">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
     <style>
@@ -21,7 +21,6 @@
         
         .dashboard-content { display: none; }
         
-        /* تصميم مربعات الإحصائيات */
         .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
         .stat-box { background: rgba(15,23,42,0.6); padding: 10px 6px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; color: #94a3b8; }
         .stat-val { display: block; font-size: 18px; font-weight: 900; color: #38bdf8; margin-top: 4px; }
@@ -42,7 +41,6 @@
 
     <div class="admin-card">
 
-        <!-- شاشة تسجيل الدخول -->
         <div id="lockScreen">
             <h2>🔒 صفحة محمية</h2>
             <p>أدخل الرمز السري للتحكم والإحصائيات</p>
@@ -59,12 +57,10 @@
             </div>
         </div>
 
-        <!-- لوحة التحكم والإحصائيات -->
         <div id="dashboardScreen" class="dashboard-content">
             <h2>📊 لوحة تحكم الباسم</h2>
             <p>متابعة التفاعلات وتغيير حالة التوصيل</p>
 
-            <!-- عدادات الإحصائيات الحقيقية -->
             <div class="stats-grid">
                 <div class="stat-box">الزيارات<span id="viewsVal" class="stat-val">0</span></div>
                 <div class="stat-box">واتساب<span id="waVal" class="stat-val">0</span></div>
@@ -126,7 +122,6 @@
             loadDashboardData();
         }
 
-        // جلب وعرض البيانات الحقيقية (الحالة والعدادات)
         async function loadDashboardData() {
             try {
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest?t=${Date.now()}`, {
@@ -135,12 +130,10 @@
                 const data = await res.json();
                 const record = data.record || {};
 
-                // عرض العدادات
                 document.getElementById("viewsVal").textContent = record.views || 0;
                 document.getElementById("waVal").textContent = record.whatsapp_clicks || 0;
                 document.getElementById("callVal").textContent = record.call_clicks || 0;
 
-                // عرض الحالة
                 renderStatus(record.active);
             } catch (e) {
                 statusBox.textContent = "تعذر جلب البيانات الحالية";
@@ -157,20 +150,16 @@
             }
         }
 
-        // دالة تغيير الحالة بأمان تام (دون التأثير على الإحصائيات)
         async function setStatus(isActive) {
             toast.textContent = "جاري تحديث الحالة...";
             try {
-                // 1. سحب البيانات الحالية أولاً للحفاظ على العدادات كما هي
                 const getRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
                     headers: { 'X-Master-Key': API_KEY }
                 });
                 const currentData = (await getRes.json()).record || {};
 
-                // 2. تحديث حالة الـ active فقط
                 currentData.active = isActive;
 
-                // 3. إعادة إرسال الكيان كاملاً ومحدثاً
                 const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
                     method: 'PUT',
                     headers: {
@@ -199,6 +188,3 @@
     </script>
 </body>
 </html>
-```[cite: 2]
-
-نسخ كامل وملف نظيف وجاهز بدون أي نواقص أو تخبيص! انسخه استبدله بملف `admin.html` عندك وارفع الشغل للـ GitHub، وهيك أمور اللوحة والإحصائيات وتغيير الحالة صارت مرتبة 100%.
